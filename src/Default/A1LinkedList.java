@@ -1,5 +1,10 @@
 package Default;
 
+import java.awt.print.Printable;
+
+import Default.PolynomialLinkedList;
+import Default.PolynomialLinkedList.PNode;
+
 public class A1LinkedList {
 	public static void main(String argc[]){
 		LinkedList<Integer> sl = new LinkedList<>();
@@ -50,6 +55,27 @@ public class A1LinkedList {
 		p3.print();
 		p4.print();
 		sum.print();
+		print(sum.negate());
 		//prod.print();
+	}
+	public static void print(PolynomialLinkedList p){
+		if (p.first == null){
+			System.out.println("");
+			return;
+		}
+		PNode temp = p.first;
+		String ans = "";
+		while (temp != null){
+			if (temp.getCoe() > 0) {
+				if (temp != p.first) ans = ans + " + ";
+				ans = ans + temp.getCoe();
+			}
+			else if (temp.getCoe() < 0) ans = ans + " - " + temp.getCoe() * -1;
+			if (temp.getExp() != 0){
+				ans = ans + "X^" + temp.getExp();
+			}
+			temp = temp.getNext();
+		}
+		System.out.println(ans);
 	}
 }

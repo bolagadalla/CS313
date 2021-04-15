@@ -1,7 +1,7 @@
 package Default;
 
 class PolynomialLinkedList{
-	private static class PNode{
+	public class PNode{
 		private int coe;
 		private int exp;
 		private PNode next;
@@ -20,7 +20,7 @@ class PolynomialLinkedList{
 		public int getExp(){ return exp;}
 		public PNode getNext(){ return next;}
 	}
-	private PNode first;
+	public PNode first;
 	private PNode last;
 	    public PolynomialLinkedList(){
 			first = last = null;
@@ -135,5 +135,27 @@ class PolynomialLinkedList{
 			PolynomialLinkedList product = new PolynomialLinkedList();
 			
 			return product;
+		}
+		
+		/*
+		Write method negate of PolynomialLinkedList which returns back a new PolynomialLinkedList that negate each term in the caller PolynomialLinkeList.
+		PolynomialLinkedList has first and last PNode reference.
+		Each term is stored in a PNode which has getCoe(), getExp(), getNext(), setNext() method.
+		*/
+		public PolynomialLinkedList negate()
+		{
+			PolynomialLinkedList result = new PolynomialLinkedList();
+			PNode res = new PNode(0,0);
+			PNode resCurrentNode = res;
+			PNode currentNode = first;
+			while(currentNode != null)
+			{
+				resCurrentNode.next = new PNode(currentNode.getCoe() * -1, currentNode.getExp());
+				resCurrentNode = resCurrentNode.next;
+				currentNode = currentNode.next;
+			}
+			result.last = new PNode(last.getCoe() * -1, last.getExp());
+			result.first = res.next;
+			return result;
 		}
 }
